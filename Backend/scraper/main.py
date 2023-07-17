@@ -4,14 +4,21 @@ import json
 import os
 from amazon import get_product as get_amazon_product
 from requests import post
-
+""" 
+constants de urls en las que queremos buscar, y los selectores de los elementos que queremos buscar en cada pagina
+"""
 AMAZON = "https://amazon.ca"
-
+EBAY = "https://ebay.es"
 URLS = {
     AMAZON: {
         "search_field_query": 'input[name="field-keywords"]',
         "search_button_query": 'input[value="Go"]',
         "product_selector": "div.s-card-container"
+    },
+    EBAY: {
+        "search_field_query": 'input[name="_nkw"]',
+        "search_button_query": 'input[Value="Buscar"]',
+        "product_selector": "div.s-item__wrapper"
     }
 }
 
