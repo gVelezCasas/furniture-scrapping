@@ -29,8 +29,8 @@ async def get_product(product_div):
     image_url = await image_element.get_attribute('src') if image_element else None
     product_name = await name_element.inner_text() if name_element else None
     try:
-        print((await price_element.inner_text()).replace("$", "").replace(",", "").strip())
-        product_price = float((await price_element.inner_text()).replace("$", "").replace(",", "").strip()) if price_element else None
+        print((await price_element.inner_text()).replace("€", "").replace(",", "").strip())
+        product_price = float((await price_element.inner_text()).replace("€", "").replace(",", "").strip()) if price_element else None
     except:
         product_price = None
     product_url = "/".join((await url_element.get_attribute('href')).split("/")[:4]) if url_element else None
