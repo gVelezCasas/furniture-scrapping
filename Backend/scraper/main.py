@@ -3,10 +3,11 @@ from playwright.async_api import async_playwright
 import json
 import os
 from amazon import get_product as get_amazon_product
+from ebay import get_product as get_ebay_product
 from requests import post
 
 AMAZON = "https://amazon.es"
-
+EBAY = "https://ebay.es"
 URLS = {
     AMAZON: {
         "search_field_query": 'input[name="field-keywords"]',
@@ -115,6 +116,8 @@ async def main(url, search_text, response_route):
         def func(x): return None
         if url == AMAZON:
             func = get_amazon_product
+        elif url == EBAY:
+            func = get_ebay_product
         else:
             raise Exception('Invalid URL')
 
