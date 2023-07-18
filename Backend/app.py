@@ -46,7 +46,7 @@ def submit_results():
     results = request.json.get('data')
     search_text = request.json.get("search_text")
     source = request.json.get("source")
-
+    print(results)
     for result in results:
         product_result = ProductResult(
             name=result['name'],
@@ -176,7 +176,7 @@ def get_tracked_products():
 @app.route("/update-tracked-products", methods=["POST"])
 def update_tracked_products():
     tracked_products = TrackedProducts.query.all()
-    url = "https://amazon.ca"
+    url = "https://amazon.es"
 
     product_names = []
     for tracked_product in tracked_products:

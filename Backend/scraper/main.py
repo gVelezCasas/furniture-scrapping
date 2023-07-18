@@ -4,15 +4,13 @@ import json
 import os
 from amazon import get_product as get_amazon_product
 from requests import post
-""" 
-constants de urls en las que queremos buscar, y los selectores de los elementos que queremos buscar en cada pagina
-"""
-AMAZON = "https://amazon.ca"
-EBAY = "https://ebay.es"
+
+AMAZON = "https://amazon.es"
+
 URLS = {
     AMAZON: {
         "search_field_query": 'input[name="field-keywords"]',
-        "search_button_query": 'input[value="Go"]',
+        "search_button_query": 'input[value="Ir"]',
         "product_selector": "div.s-card-container"
     },
     EBAY: {
@@ -60,7 +58,8 @@ async def get_products(page, search_text, selector, get_product):
     product_divs = await page.query_selector_all(selector)
     valid_products = []
     words = search_text.split(" ")
-
+    print('product_divs')
+    print(product_divs)
     async with asyncio.TaskGroup() as tg:
         for div in product_divs:
             async def task(p_div):
