@@ -5,7 +5,7 @@ import os
 from amazon import get_product as get_amazon_product
 from ebay import get_product as get_ebay_product
 from requests import post
-
+from bs4 import BeautifulSoup
 AMAZON = "https://amazon.es"
 EBAY = "https://ebay.es"
 URLS = {
@@ -110,9 +110,15 @@ async def main(url, search_text, response_route):
         page = await browser.new_page()
         print("Connected.")
         await page.goto(url, timeout=120000)
+        print('saving the html content of the page')
+        with open('page.html', 'w') as f:
+            soup = BeautifulSoup(await page.content(), 'html.parser')
+            body = soup.find('body')
+            f.write(body.prettify())
+        return
         print("Loaded initial page.")
         search_page = await search(metadata, page, search_text)
-
+        
         def func(x): return None
         if url == AMAZON:
             func = get_amazon_product

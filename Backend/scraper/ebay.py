@@ -38,7 +38,7 @@ async def get_product(product_div):
         product_price = float((await price_element.inner_text()).replace("EUR", "").replace(",", "").strip()) if price_element else None
     except:
         product_price = None
-    product_url = (await url_element.get_attribute('href')) if url_element else None
+    product_url = "/".join((await url_element.get_attribute('href')).split("/")[2:]).replace("www.ebay.es","") if url_element else None
     # stock = stock_element[0] if len(stock_element) > 0 else None
     # Prints the product url
     print('product_url')
