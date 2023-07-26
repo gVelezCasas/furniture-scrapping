@@ -8,6 +8,8 @@ from requests import post
 from bs4 import BeautifulSoup
 AMAZON = "https://amazon.es"
 EBAY = "https://ebay.es"
+SEASONSBYMACABLA = "https://seasonsbymacabla.com/"
+ALIEXPRESS = "https://es.aliexpress.com/"
 URLS = {
     AMAZON: {
         "search_field_query": 'input[name="field-keywords"]',
@@ -18,6 +20,16 @@ URLS = {
         "search_field_query": 'input[name="_nkw"]',
         "search_button_query": 'input[Value="Buscar"]',
         "product_selector": "div.s-item__wrapper"
+    },
+    SEASONSBYMACABLA: {
+        "search_field_query": 'input[name="field-keywords"]',
+        "search_button_query": 'input[value="Ir"]',
+        "product_selector": "div.s-card-container"
+    },
+    ALIEXPRESS: {
+        "search_field_query": 'input[name="field-keywords"]',
+        "search_button_query": 'input[value="Ir"]',
+        "product_selector": "div.s-card-container"
     }
 }
 
@@ -113,8 +125,8 @@ async def main(url, search_text, response_route):
         print('saving the html content of the page')
         with open('page.html', 'w') as f:
             soup = BeautifulSoup(await page.content(), 'html.parser')
-            body = soup.find('body')
-            f.write(body.prettify())
+            body = soup.find('header')
+            f.write(body)
         return
         print("Loaded initial page.")
         search_page = await search(metadata, page, search_text)

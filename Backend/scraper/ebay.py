@@ -12,7 +12,7 @@ async def get_product(product_div):
     image_element_future = product_div.query_selector('.s-item__image-wrapper > img')
     name_element_future = product_div.query_selector(
         '.s-item__title > span')
-    price_element_future = product_div.query_selector('span.ITALIC')
+    price_element_future = product_div.query_selector('.s-item__price')
     url_element_future = product_div.query_selector(
         '.s-item__image > a')
 
